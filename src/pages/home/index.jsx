@@ -1,13 +1,16 @@
 import React, { memo, useEffect } from "react";
-import luRequest from "@/services"
+import { useDispatch } from "react-redux"
+import HomeBanner from "./c-cpns/home-banner";
+import HomeWrapper from "./style"
+import { fetchHomeDataAction } from "@/store/modules/home"
 const Home = memo(() => {
-  // 发送网络请求
+  const dispatch = useDispatch();
   useEffect(() => {
-    luRequest.get({url: "/home/highscore"}).then((res) => {
-      console.log(res)
-    })
-  }, [])
-  return <div>Home</div>;
+    dispatch(fetchHomeDataAction())
+  }, [dispatch])
+  return <HomeWrapper>
+    <HomeBanner />
+  </HomeWrapper>;
 });
 
 export default Home;
